@@ -6,7 +6,7 @@ const { Category, Product } = require('../../models');
 router.get('/', async (req, res) => {
   try {
     const categoriesData = await Category.findAll({
-     include: [{ model: Product}, { model: ProductTag}],
+     include: [{ model: Product}],
     });
     
     if (!categoriesData) {
@@ -54,7 +54,7 @@ router.put('/:id', async (req, res) => {
         id: req.params.id,
       },
     });
-    if (!categoriesData[0]) {
+    if (!categoriesData) {
       res.status(404).json({ message: 'No category with this id!' });
       return;
     }
